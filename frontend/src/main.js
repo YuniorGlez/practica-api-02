@@ -2,7 +2,6 @@
 import * as api from './api.js';
 import * as ui from './ui.js';
 import { markStep } from './guide.js'; // Import guide functions if needed
-import './ai-assistant.js'; // Initialize AI Assistant listeners
 
 /**
  * Loads and displays the initial list of characters.
@@ -114,36 +113,11 @@ async function handleSearch(query) {
 function initializeApp() {
   console.log('Initializing application...');
   ui.setupEventListeners(handleSave, handleSearch);
-  setupChatToggle();
   loadInitialCharacters();
   // Step 3: Students understand this initialization flow
   // markStep(3); // Mark step 3 once app is initialized
 
   // Add other initializations if needed
-}
-
-/**
- * Sets up the toggle functionality for the AI Assistant chat panel.
- */
-function setupChatToggle() {
-  const toggleButton = document.getElementById('toggle-chat-btn');
-  const chatPanel = document.getElementById('ai-assistant');
-
-  if (toggleButton && chatPanel) {
-    toggleButton.addEventListener('click', () => {
-      chatPanel.classList.toggle('hidden');
-      // Optional: Change button icon/text when open/closed
-      if (chatPanel.classList.contains('hidden')) {
-        toggleButton.textContent = '🤖';
-        toggleButton.title = 'Abrir Asistente de IA';
-      } else {
-        toggleButton.textContent = '❌'; // Close icon
-        toggleButton.title = 'Cerrar Asistente de IA';
-      }
-    });
-  } else {
-    console.warn('Chat toggle button or panel not found.');
-  }
 }
 
 // Start the application once the DOM is ready

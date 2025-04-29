@@ -44,7 +44,6 @@ input[type="search"] {
 
 /* Layout Containers */
 #guide-panel,
-#ai-assistant,
 .main-content { /* Create a container for search/list/form */
   background-color: #fff;
   padding: 20px;
@@ -64,13 +63,6 @@ input[type="search"] {
 #guide-panel {
     flex: 1; /* Take less space */
     min-width: 250px;
-}
-
-#ai-assistant {
-    flex: 1; /* Take less space */
-    min-width: 250px;
-    display: flex;
-    flex-direction: column;
 }
 
 /* Guide Panel */
@@ -101,50 +93,6 @@ input[type="search"] {
 #guide-steps input[type="checkbox"] {
   margin-right: 8px;
   cursor: pointer;
-}
-
-/* AI Assistant */
-#ai-assistant h2 {
-    margin-top: 0;
-    color: #34495e;
-}
-
-#chat-window {
-  border: 1px solid #eee;
-  height: 300px;
-  overflow-y: auto;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #fdfdfd;
-  flex-grow: 1; /* Allow window to grow */
-}
-
-.message {
-  margin-bottom: 8px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  max-width: 80%;
-  word-wrap: break-word;
-}
-
-.message.user {
-  background-color: #eaf2fa;
-  align-self: flex-end;
-  margin-left: auto; /* Push user messages to the right */
-}
-
-.message.assistant {
-  background-color: #f1f1f1;
-  align-self: flex-start;
-}
-
-#chat-form {
-  display: flex;
-}
-
-#chat-input {
-  flex-grow: 1; /* Input takes remaining space */
-  margin-right: 5px;
 }
 
 /* Search Area */
@@ -228,7 +176,6 @@ input[type="search"] {
   }
 
   #guide-panel,
-  #ai-assistant,
   .main-content {
       width: 100%;
       flex: none; /* Reset flex sizing */

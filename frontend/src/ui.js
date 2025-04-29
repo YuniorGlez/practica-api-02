@@ -11,7 +11,7 @@ const searchBtn = document.getElementById('search-btn');
  */
 export const renderCharacters = (characters, onEdit, onDelete) => {
   if (!charactersListElement) return;
-  charactersListElement.innerHTML = ''; // Clear list
+  charactersListElement.innerHTML = '';
 
   if (!Array.isArray(characters) || characters.length === 0) {
     charactersListElement.innerHTML = '<li>No characters found.</li>';
@@ -20,25 +20,63 @@ export const renderCharacters = (characters, onEdit, onDelete) => {
 
   characters.forEach(char => {
     const li = document.createElement('li');
-    li.textContent = `${char.name} (${char.race}) - Power: ${char.powerLevel}`;
+    li.className = 'character-card';
     li.dataset.id = char.id;
 
+    // Card layout: image left, info right
+    const cardContent = document.createElement('div');
+    cardContent.className = 'character-card-content';
+
+    // Image
+    const imgContainer = document.createElement('div');
+    imgContainer.className = 'character-img-container';
+    if (char.image) {
+      const img = document.createElement('img');
+      img.src = char.image;
+      img.alt = `${char.name} image`;
+      img.className = 'character-img';
+      imgContainer.appendChild(img);
+    }
+    cardContent.appendChild(imgContainer);
+
+    // Info
+    const infoDiv = document.createElement('div');
+    infoDiv.className = 'character-info';
+    infoDiv.innerHTML = `
+      <div class="character-name">${char.name}</div>
+      <div class="character-meta">
+        <span class="character-race">(${char.race})</span>
+        <span class="character-gender">${char.gender ? '· ' + char.gender : ''}</span>
+      </div>
+      <div class="character-ki"><strong>Ki:</strong> ${char.ki} <span class="character-maxki">/ Max Ki: ${char.maxKi}</span></div>
+      <div class="character-affiliation"><strong>Afiliación:</strong> ${char.affiliation || '-'}</div>
+    `;
+    // Description
+    if (char.description) {
+      const desc = document.createElement('div');
+      desc.className = 'character-description';
+      desc.textContent = char.description;
+      infoDiv.appendChild(desc);
+    }
+    cardContent.appendChild(infoDiv);
+
+    li.appendChild(cardContent);
+
+    // Buttons (bottom right)
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'button-group character-card-buttons';
     const editButton = document.createElement('button');
     editButton.textContent = 'Edit';
-    editButton.classList.add('edit-btn');
+    editButton.className = 'edit-btn';
     editButton.onclick = () => onEdit(char.id);
-
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
-    deleteButton.classList.add('delete-btn');
+    deleteButton.className = 'delete-btn';
     deleteButton.onclick = () => onDelete(char.id);
-
-    const buttonContainer = document.createElement('div');
-    buttonContainer.classList.add('button-group');
     buttonContainer.appendChild(editButton);
     buttonContainer.appendChild(deleteButton);
-
     li.appendChild(buttonContainer);
+
     charactersListElement.appendChild(li);
   });
 };
@@ -52,7 +90,12 @@ export const populateForm = (character) => {
   characterForm.elements['id'].value = character.id || '';
   characterForm.elements['name'].value = character.name || '';
   characterForm.elements['race'].value = character.race || '';
-  characterForm.elements['powerLevel'].value = character.powerLevel || '';
+  characterForm.elements['ki'].value = character.ki || '';
+  characterForm.elements['maxKi'].value = character.maxKi || '';
+  characterForm.elements['gender'].value = character.gender || '';
+  characterForm.elements['affiliation'].value = character.affiliation || '';
+  characterForm.elements['image'].value = character.image || '';
+  characterForm.elements['description'].value = character.description || '';
 };
 
 /**
@@ -62,19 +105,32 @@ export const clearForm = () => {
   if (!characterForm) return;
   characterForm.reset();
   characterForm.elements['id'].value = ''; // Ensure hidden ID is cleared
+  characterForm.elements['name'].value = '';
+  characterForm.elements['race'].value = '';
+  characterForm.elements['ki'].value = '';
+  characterForm.elements['maxKi'].value = '';
+  characterForm.elements['gender'].value = '';
+  characterForm.elements['affiliation'].value = '';
+  characterForm.elements['image'].value = '';
+  characterForm.elements['description'].value = '';
 };
 
 /**
  * Gets the current data from the character form.
- * @returns {object} Form data including name, race, powerLevel, and id.
+ * @returns {object} Form data including all character fields.
  */
 export const getFormData = () => {
   if (!characterForm) return {};
   const id = characterForm.elements['id'].value;
   const name = characterForm.elements['name'].value;
   const race = characterForm.elements['race'].value;
-  const powerLevel = characterForm.elements['powerLevel'].value;
-  return { id, name, race, powerLevel };
+  const ki = characterForm.elements['ki'].value;
+  const maxKi = characterForm.elements['maxKi'].value;
+  const gender = characterForm.elements['gender'].value;
+  const affiliation = characterForm.elements['affiliation'].value;
+  const image = characterForm.elements['image'].value;
+  const description = characterForm.elements['description'].value;
+  return { id, name, race, ki, maxKi, gender, affiliation, image, description };
 };
 
 /**

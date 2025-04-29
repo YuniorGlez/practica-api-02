@@ -5,13 +5,55 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Dragon Ball Character Manager</title>
   <link rel="stylesheet" href="./index.css">
-  <script type="module" src="./index.js"></script>
 </head>
 
 <body>
+  <h1>Gestión de Personajes de Dragon Ball</h1>
 
+  <!-- Guía de Pasos -->
+  <aside id="guide-panel">
+    <h2>Guía de Aprendizaje</h2>
+    <ol id="guide-steps"></ol>
+  </aside>
+
+  <!-- Chat Asistente IA (Initially hidden) -->
+  <section id="ai-assistant" class="hidden">
+    <h2>Asistente de IA</h2>
+    <div id="chat-window"></div>
+    <form id="chat-form">
+      <input id="chat-input" placeholder="¿Tienes dudas?">
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <!-- Main Content Area (Search, List, Form) -->
+  <div class="main-content">
+    <!-- Buscador -->
+    <div class="search-area">
+      <input id="search-input" type="search" placeholder="Buscar personaje...">
+      <button id="search-btn">Buscar</button>
+    </div>
+
+    <!-- Lista de personajes -->
+    <ul id="characters-list"></ul>
+
+    <!-- Formulario -->
+    <form id="character-form">
+      <input name="id" type="hidden">
+      <input name="name" placeholder="Nombre">
+      <input name="race" placeholder="Raza">
+      <input name="powerLevel" type="number" placeholder="Power Level">
+      <button type="submit">Guardar</button>
+    </form>
+  </div>
+
+  <!-- Floating Toggle Button for AI Assistant -->
+  <button id="toggle-chat-btn" title="Abrir Asistente de IA">🤖</button>
+
+  <!-- Scripts loaded as modules -->
+  <script type="module" src="./main.js"></script>
 </body>
 
 </html>

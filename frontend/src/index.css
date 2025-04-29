@@ -1,3 +1,301 @@
+/* General Styles */
 body {
-  /* background: #171717; */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f7f9;
+  color: #333;
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 20px;
+}
+
+h1 {
+  width: 100%; /* Take full width */
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="search"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-right: 5px; /* Space before button */
+}
+
+/* Layout Containers */
+#guide-panel,
+#ai-assistant,
+.main-content { /* Create a container for search/list/form */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Make main content area flexible */
+.main-content {
+    flex: 2; /* Take more space */
+    min-width: 300px; /* Ensure minimum width */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#guide-panel {
+    flex: 1; /* Take less space */
+    min-width: 250px;
+}
+
+#ai-assistant {
+    flex: 1; /* Take less space */
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Guide Panel */
+#guide-panel h2 {
+  margin-top: 0;
+  color: #34495e;
+}
+
+#guide-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px; /* Limit height and allow scrolling */
+  overflow-y: auto;
+}
+
+#guide-steps li {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+#guide-steps label {
+  display: flex;
+  align-items: center;
+}
+
+#guide-steps input[type="checkbox"] {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+/* AI Assistant */
+#ai-assistant h2 {
+    margin-top: 0;
+    color: #34495e;
+}
+
+#chat-window {
+  border: 1px solid #eee;
+  height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fdfdfd;
+  flex-grow: 1; /* Allow window to grow */
+}
+
+.message {
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message.user {
+  background-color: #eaf2fa;
+  align-self: flex-end;
+  margin-left: auto; /* Push user messages to the right */
+}
+
+.message.assistant {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+}
+
+#chat-form {
+  display: flex;
+}
+
+#chat-input {
+  flex-grow: 1; /* Input takes remaining space */
+  margin-right: 5px;
+}
+
+/* Search Area */
+.search-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#search-input {
+    flex-grow: 1;
+}
+
+/* Characters List */
+#characters-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0; /* Add margin below list */
+}
+
+#characters-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#characters-list li:last-child {
+  border-bottom: none;
+}
+
+.button-group button {
+    margin-left: 5px;
+    padding: 5px 8px;
+    font-size: 0.9rem;
+}
+
+.button-group .edit-btn {
+    background-color: #f39c12;
+}
+.button-group .edit-btn:hover {
+    background-color: #e67e22;
+}
+
+.button-group .delete-btn {
+    background-color: #e74c3c;
+}
+.button-group .delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Character Form */
+#character-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#character-form input[type="text"],
+#character-form input[type="number"] {
+  flex-grow: 1;
+  min-width: 120px; /* Ensure inputs don't get too small */
+  margin-right: 0; /* Remove default margin */
+}
+
+#character-form button[type="submit"] {
+  background-color: #2ecc71;
+  width: 100%; /* Make save button full width in its row */
+  margin-top: 10px;
+}
+
+#character-form button[type="submit"]:hover {
+  background-color: #27ae60;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  #guide-panel,
+  #ai-assistant,
+  .main-content {
+      width: 100%;
+      flex: none; /* Reset flex sizing */
+      box-sizing: border-box; /* Include padding in width */
+  }
+}
+
+/* Floating Chat Button */
+#toggle-chat-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #1e88e5; /* Brighter blue */
+  color: white;
+  font-size: 2rem; /* Larger icon */
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content */
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#toggle-chat-btn:hover {
+  background-color: #1565c0; /* Darker blue on hover */
+  transform: scale(1.05);
+}
+
+/* AI Assistant Panel Styling (when visible) */
+#ai-assistant {
+  /* Keep existing styles but ensure it's positioned correctly when shown */
+  /* Option 1: Keep in flex layout (adjust flex basis/grow) */
+   flex: 1; 
+   min-width: 300px; /* Adjust min-width as needed */
+   max-width: 400px; /* Optional max-width */
+   display: flex;
+   flex-direction: column;
+   /* Add transition for smooth appearance */
+   transition: opacity 0.3s ease, transform 0.3s ease;
+   opacity: 1;
+   transform: translateY(0);
+   /* Ensure it doesn't overlap footer/button - maybe margin */
+   margin-bottom: 90px; /* Add margin to avoid overlap with button */
+
+  /* Option 2: Fixed position popup (alternative) */
+  /* position: fixed;
+  bottom: 90px; /* Above the toggle button */
+  /* right: 20px;
+  width: 350px;
+  max-height: 70vh;
+  z-index: 999; */
+}
+
+/* Hidden State */
+#ai-assistant.hidden {
+  /* display: none; */ /* Simple hide/show */
+  /* OR use opacity/transform for animation */
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none; /* Prevent interaction when hidden */
+  position: fixed; /* Take out of flow when hidden with transform */
+  bottom: 90px;
+  right: 20px;
+  z-index: -1; /* Hide behind */
 }

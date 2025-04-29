@@ -7,11 +7,6 @@ Proyecto de formación para practicar llamadas a API REST con Axios en JavaScrip
 ```
 db/
 ├─ db.json         # Datos para JSON Server
-assistant/
-├─ server.js       # Servidor backend para el Asistente IA
-├─ package.json
-├─ .env.example    # Plantilla para variables de entorno (API Key)
-└─ .env            # (Crear manualmente) Variables de entorno
 frontend/
 ├─ src/
 │  ├─ index.html    # Estructura principal de la UI
@@ -20,7 +15,6 @@ frontend/
 │  ├─ ui.js         # Lógica de manipulación del DOM (lista, formulario)
 │  ├─ main.js       # Orquestador principal (inicialización, eventos)
 │  ├─ guide.js      # Lógica de la guía de pasos interactiva
-│  └─ ai-assistant.js # Lógica del chat con el asistente IA
 ├─ package.json
 .gitignore
 README.md
@@ -39,22 +33,11 @@ prd.md
 2.  **Instalar dependencias del Frontend:**
     ```bash
     cd frontend
-    npm install
+    pnpm install
+    pnpm run dev
     cd ..
     ```
-3.  **Instalar dependencias del Asistente IA:**
-    ```bash
-    cd assistant
-    npm install
-    ```
-4.  **Configurar API Key:**
-    - Copia `assistant/.env.example` a `assistant/.env`.
-    - Edita `assistant/.env` y reemplaza `your_openai_api_key_here` con tu API Key real de OpenAI.
-    ```bash
-    # Dentro de la carpeta assistant/
-    cp .env.example .env
-    # Ahora edita el fichero .env con tu clave
-    ```
+
 
 ## Cómo Empezar
 
@@ -66,35 +49,25 @@ Desde la raíz del proyecto (`dragonball/`):
 
 ```bash
 npm install -g json-server # Instalar globalmente si no lo tienes
+cd db
 json-server --watch db/db.json --port 3000
 ```
 
 Esto iniciará la API REST simulada en `http://localhost:3000`. Puedes acceder a `http://localhost:3000/characters` en tu navegador para ver los datos.
 
-**Terminal 2: Levantar Asistente de IA**
+**Terminal 2: Levantar el frontend**
 
 Desde la raíz del proyecto (`dragonball/`):
 
 ```bash
-cd assistant
-npm start
+cd frontend
+pnpm install
+pnpm dev
 ```
-
-Esto iniciará el servidor del asistente en `http://localhost:4000` (o el puerto definido en `.env`).
-
-**Abrir Frontend**
-
-- Abre el archivo `frontend/src/index.html` directamente en tu navegador web.
-- Opcional: Si tienes `live-server` instalado (`npm install -g live-server`), puedes ejecutarlo desde la carpeta `frontend/src` para tener recarga automática:
-  ```bash
-  cd frontend/src
-  live-server
-  ```
 
 ## El Ejercicio
 
 1.  Sigue los pasos indicados en la **Guía de Aprendizaje** en el panel lateral.
-2.  Tu tarea principal es **implementar las funciones** dentro de `frontend/src/api.js` usando `axios` para realizar las llamadas a la API de JSON Server (`http://localhost:3000/characters`).
-3.  Si tienes dudas sobre Axios, cómo hacer las llamadas, o conceptos de API/asincronía, utiliza el **Asistente de IA** en el panel derecho.
+2.  Tu tarea principal es **implementar las funciones** dentro de `frontend/src/api.js` usando `axios` o usando `fetch` para realizar las llamadas a la API de JSON Server (`http://localhost:3000/characters`).
 
 ¡Mucha suerte! 

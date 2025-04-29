@@ -25,7 +25,6 @@ prd.md
 
 - Node.js (v16 o superior recomendado)
 - npm (viene con Node.js)
-- Una API Key de OpenAI ([https://platform.openai.com/api-keys](https://platform.openai.com/api-keys))
 
 ## Instalación
 
